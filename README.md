@@ -1,5 +1,17 @@
 ### Hi there 👋
 
+My name is Antonio. I am 22 years old. I will be doing an internship as a Machine Learning Framework Engineer at [Cerebras Systems](https://www.cerebras.net/) in the fall! I have previously done internships as a machine learning engineer and data scientist at [Yelp](https://www.linkedin.com/company/yelp-com), [Kik](https://www.kik.com/), and [Capital One](https://www.linkedin.com/company/capital-one)
+
+On the side,
+- 🔭 I’m currently working on a deep Generative Adversarial Network that can generate high quality images of deep space (comparable to the Hubble eXtreme Deep Field).
+- 👯 I’m looking to collaborate on any exciting cutting edge machine learning projects.
+- 💬 Ask me about my experience working in the machine learning/data science field
+- 📫 Feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/antoniojkim/)
+- ⚡ Fun fact: I am classically trained on the piano 🎹
+
+#### | [LinkedIn](https://www.linkedin.com/in/antoniojkim/) | [Resume](https://github.com/antoniojkim/antoniojkim/tree/master/Resume/Resume.pdf) |
+
+
 <!--
 **antoniojkim/antoniojkim** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
