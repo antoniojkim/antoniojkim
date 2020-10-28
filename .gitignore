@@ -1,4 +1,8 @@
-Resume/.auctex-auto/
-Resume/*.aux
-Resume/*.log
-Resume/*.out
+# Latex Temp Files
+*/.auctex-auto/
+*.aux
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.synctex.gz

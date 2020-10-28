@@ -1,4 +1,3 @@
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Antonio Kim
@@ -6,99 +5,167 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   CLASS OPTIONS AND REQUIRED PACKAGES
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\ProvidesClass{Resume}[Resume CV class]
+\author{Antonio Kim}
+% \RequirePackage[dvipsnames]{xcolor} % moved here I guess article class causes option clash with xcolor if used after loading the class
+\LoadClass[10pt]{article}
 \NeedsTeXFormat{LaTeX2e}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
-\ProcessOptions\relax
-\LoadClass{article}
+\ProvidesClass{Resume}[Resume Class]
+% \RequirePackage[sfdefault]{noto}
+% \RequirePackage{etoolbox}
+% \RequirePackage{pgffor}
+% \RequirePackage{titlesec}
+% \RequirePackage{tikz}
+% \RequirePackage{fontspec}
+\RequirePackage[left=0.75in,top=0.3in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+\RequirePackage{hyperref}
+% \RequirePackage{fontawesome}
+% \RequirePackage{mfirstuc}
+% \RequirePackage{ifthen}
+% \RequirePackage{lipsum}
+% \RequirePackage{array}
+% \pagestyle{empty}
 
-% Specifies horizontal and vertical page margins
-\usepackage[hmargin=1.25cm, vmargin=0.75cm]{geometry}
+%Setup
 
-% Required for links
-\usepackage{hyperref}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   COLORS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% Required for custom colors
-\usepackage[usenames,dvipsnames]{xcolor}
-
-\definecolor{primary}{RGB}{1, 1, 1} % The primary document color for content text
-\definecolor{headings}{RGB}{0, 0.64, 0.94} % The color of the large sections
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   FONTS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% \usepackage{fontspec} % Required for specifying custom fonts in XeLaTeX
-
-% The primary font for content text; defines bold, italic and bold-italic as well
-% \setmainfont[Color=primary, Path = fonts/lato/,BoldItalicFont=Lato-RegIta,BoldFont=Lato-Reg,ItalicFont=Lato-LigIta]{Lato-Lig}
-
-% \setsansfont[Scale=MatchLowercase,Mapping=tex-text, Path = fonts/raleway/]{Raleway-ExtraLight} % The font used where \sfffamily is called
+\newcommand*{\setname}[1]{\def\@fullname{#1}}
+\newcommand*{\setaddress}[1]{\def\@address{#1}}
+\newcommand*{\setmobile}[1]{\def\@mobile{#1}}
+\newcommand*{\setposition}[1]{\def\@position{#1}}
+\newcommand*{\setmail}[1]{\def\@mail{#1}}
+\newcommand*{\setthemecolor}[1]{\def\@themecolor{#1}}
+\newcommand*{\setlinkedinname}[1]{\def\@linkedinname{#1}}
+\newcommand*{\setlinkedinaccount}[1]{\def\@linkedinaccount{#1}}
+\newcommand*{\setgithubname}[1]{\def\@githubname{#1}}
+\newcommand*{\setgithubaccount}[1]{\def\@githubaccount{#1}}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   MAIN HEADING COMMAND
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\newcommand{\namesection}[3]{ % Defines the command for the main heading
-\centering{ % Center the name
-  \fontsize{40pt}{60pt} % Font size
-  \fontspec[Path = fonts/lato/]{Lato-Hai}\selectfont #1 % First name font
-  \fontspec[Path = fonts/lato/]{Lato-Lig}\selectfont #2 % Last name font
-} \\[5pt] % Whitespace between the name and contact information
-\centering{ % Center the contact information
-  \color{headings} % Use the headings color
-  \fontspec[Path = fonts/raleway/]{Raleway-Medium}\fontsize{11pt}{14pt}\selectfont #3} % Contact information font
-\noindent\makebox[\linewidth]{\color{headings}\rule{\paperwidth}{0.4pt}} % Horizontal rule
-\vspace{-5pt} % Reduce whitespace after the rule slightly
+\newcommand{\horizontalline}{
+  \center\noindent\makebox[\linewidth]{\rule{0.95\paperwidth}{0.8pt}}
 }
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   SECTION TITLE STYLING AND SPACING
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+    colorlinks=true,
+    urlcolor=cyan,
+}
 
+% View commands
+% Header
 
-\usepackage{titlesec} % Required for customizing section/subsection/etc titles
+% % can makebox also be used?
+% \newcommand\headerview{
+% \begin{minipage}{0.25\linewidth}
+%     \profpic{0.22}{images/profilpicture}
+% \end{minipage}% 
+% \hfill
+% \begin{minipage}{0.45\linewidth}
+%     \center \name \\[0.05cm] 
+%     \contact % address \ mobile \\ mail
+% \end{minipage}
+% }
 
-\titlespacing{\section}{0pt}{0pt}{0pt} % Removes the spacing around the main section titles
-\titlespacing{\subsection}{0pt}{0pt}{0pt} % Removes the spacing around the subsections
-\newcommand{\sectionspace}{\vspace{8pt}} % Defines a command to add a set amount of space after sections and subsections
+% %contactsubviews 
 
-\titleformat{\section}{ % Customize the large section titles
-\color{headings}\scshape\fontspec[Path = fonts/lato/]{Lato-Lig}\fontsize{16pt}{24pt}\selectfont \raggedright\uppercase}{}{0em}{}
+% \newcommand{\githubview}{\href{\@linkedinaccount}{\faLinkedinSquare\ \footnotesize linkedin}}
+% \newcommand{\linkedinview}{\href{\@githubaccount}{\faGithubSquare\ \footnotesize github}}
 
-\titleformat{\subsection}{ % Customize the subsections and places worked/studied titles
-\color{subheadings}\fontspec[Path = fonts/lato/]{Lato-Bol}\fontsize{12pt}{12pt}\selectfont\bfseries\uppercase}{}{0em}{}
+\newcommand{\info}{
+    \center\huge\textbf \@fullname
+}
 
-\newcommand{\runsubsection}[1]{ % Used for creating subsections where a description is required on the same line
-\color{subheadings}\fontspec[Path = fonts/lato/]{Lato-Bol}\fontsize{12pt}{12pt}\selectfont\bfseries\uppercase {#1} \normalfont}
+% \newcommand{\contact}{%
+%         {\small \@address  \cps \@mobile \\ \@mail%
+%         \\%
+%         \linkedinview \cps \githubview \\ 
+%         } % 
+% }
 
-\newcommand{\descript}[1]{ % Used for describing the subsection either on the same line or underneath
-\color{subheadings}\raggedright\scshape\fontspec[Path = fonts/raleway/]{Raleway-Medium}\fontsize{11pt}{13pt}\selectfont {#1 \\} \normalfont}
+% % Helper commands
 
-\newcommand{\location}[1]{ % Used for specifying a duration and/or location under a subsection
-\color{headings}\raggedright\fontspec[Path = fonts/raleway/]{Raleway-Medium}\fontsize{10pt}{12pt}\selectfont {#1\\} \normalfont}
+% \newcommand\ruleafter[1]{#1~{\color{black!60!\@themecolor}\hrulefill}} % a trick to put the line with <before> parameter in \titleformat
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%    SECTION TITLE STYLING AND SPACING
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %colorfulpipeseperator
 
-\newenvironment{tightitemize} % Defines the tightitemize environment which modifies the itemize environment to be more compact
-{\vspace{-\topsep}\begin{itemize}\itemsep1pt \parskip0pt \parsep0pt}
-{\end{itemize}\vspace{-\topsep}}
+% \newcommand{\cps}{{\color{\@themecolor} \quad\textbar\quad}}
+% \newcommand{\cpshalf}{{\color{\@themecolor} \hspace{0.2em}\textbar\hspace{0.2em}}}
+
+% \newcommand{\coloredbullet}{{\color{\@themecolor} \textbullet}}
+
+% % Edit section styles
+
+% \titleformat{\section}      % Customise the \section command 
+%   {\large\bfseries\scshape\raggedright\color{\@themecolor}} % Make the \section headers large (\Large),
+%                                % small capitals (\scshape) and left aligned (\raggedright)
+%   {}{0em}                      % Can be used to give a prefix to all sections, like 'Section ...'
+%   {\ruleafter}                           % Can be used to insert code before the heading
+
+% \titlespacing*{\section}{-1pt}{0pt}{0pt}
+
+% % Textview commands
+
+% \newcommand{\experience}[2]{%
+%   \mbox { \hspace{1em} \scshape \textbf{#1} }%
+% }
+
+% \newcommand{\datetext}[1]{%
+% {\itshape  \footnotesize \mdseries  \color{black!60!\@themecolor} #1 } 
+% }
+
+% \newcommand{\datedexperience}[2]{%
+%   \begin{small} \mbox { \hspace{1em} \scshape \textbf{#1} } \end{small} \hfill \datetext{#2}\\[0.01cm] %
+% }
+
+% \newcommand{\explanation}[1]{%
+%     \mbox { \scshape \hspace{1.2em} \footnotesize #1}\\[0.05cm]
+% }
+
+% \newcommand{\explanationdetail}[1]{%
+%     \indent \begin{minipage}{0.96\linewidth} \footnotesize #1 \end{minipage} \\[0.1cm]
+% }
+
+% \newcommand{\itemwithtext}[1]{%
+%     \begin{minipage}{\linewidth} \footnotesize \item #1 \end{minipage}
+% }
+
+% \newcommand{\addblocktext}[2]{%
+%   \section{#1} 
+%   \indent \explanationdetail{\hspace{4ex} #2}
+% }
+
+% \newcommand\createskill[2]{%
+%     \textsc{\textbf{#1}} & #2
+% }
+
+% \newcommand\createtablecontent[1]{%
+%     \foreach \x [count=\xi] in {#1} {\ifthenelse{\xi=1}{\x}{\\ \x}}
+% }
+
+% \newcommand\createskillsanothertry[1]{%not used
+%   \begin{tabular}{r|l}
+%       \createtablecontent{#1}
+%         \end{tabular}
+% }
+
+% \newcommand\createskills[1]{%
+% \explanationdetail{
+%   \begin{tabular}{rl}
+%     \makeatletter
+%     \@for\thisitem:=#1\do{\thisitem\\[0.1cm]}
+%     \makeatother
+%     \end{tabular}
+% }
+% }
+
+% \newcommand\createbullets[1]{%
+%     \renewcommand{\labelitemi}{\coloredbullet}
+%   \begin{itemize}
+%     \makeatletter
+%     \@for\thisitem:=#1\do{\itemwithtext{\thisitem}}
+%     \makeatother
+%   \end{itemize}
+% }
+
+% \newcommand\createfootnote{%
+%   \renewcommand{\footnotesize}{\fontsize{7pt}{11pt}\selectfont}
+%     \renewcommand\footnoterule{\rule{0.3\linewidth}{0.5pt}}
+%     \let\thefootnote\relax\footnote{\today\ / \href{https://github.com/muratcankaracabey/latex_cv}{source code}}}
