@@ -22,16 +22,24 @@
 % \RequirePackage{mfirstuc}
 % \RequirePackage{ifthen}
 % \RequirePackage{lipsum}
-% \RequirePackage{array}
-% \pagestyle{empty}
+\RequirePackage{array}
+\RequirePackage{ragged2e}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+
+\usepackage{tgbonum}
 
 %Setup
 
 \newcommand*{\setname}[1]{\def\@fullname{#1}}
 \newcommand*{\setaddress}[1]{\def\@address{#1}}
-\newcommand*{\setmobile}[1]{\def\@mobile{#1}}
+\newcommand*{\setphone}[1]{\def\@phone{#1}}
 \newcommand*{\setposition}[1]{\def\@position{#1}}
-\newcommand*{\setmail}[1]{\def\@mail{#1}}
+\newcommand*{\setemail}[1]{\def\@email{#1}}
+\newcommand*{\seteducation}[1]{\def\@education{#1}}
+\newcommand*{\setschool}[1]{\def\@school{#1}}
 \newcommand*{\setthemecolor}[1]{\def\@themecolor{#1}}
 \newcommand*{\setlinkedinname}[1]{\def\@linkedinname{#1}}
 \newcommand*{\setlinkedinaccount}[1]{\def\@linkedinaccount{#1}}
@@ -48,6 +56,8 @@
     colorlinks=true,
     urlcolor=cyan,
 }
+
+\fontfamily{phv}\selectfont
 
 % View commands
 % Header
@@ -69,8 +79,18 @@
 % \newcommand{\githubview}{\href{\@linkedinaccount}{\faLinkedinSquare\ \footnotesize linkedin}}
 % \newcommand{\linkedinview}{\href{\@githubaccount}{\faGithubSquare\ \footnotesize github}}
 
+\def\HSinfo{\rule[-1cm]{0pt}{1.1cm}}
+
 \newcommand{\info}{
-    \center\huge\textbf \@fullname
+  \center\huge\textbf \@fullname \\
+  \normalsize
+  \begin{center}
+    \begin{tabular}{ p{3.1cm} c r }
+      & \@education & \@githubname \\ 
+      & \@school    & \@linkedinname \\  
+      & \@phone     & \@email    
+    \end{tabular}
+  \end{center}
 }
 
 % \newcommand{\contact}{%
