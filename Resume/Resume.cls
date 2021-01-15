@@ -16,7 +16,7 @@
 % \RequirePackage{titlesec}
 % \RequirePackage{tikz}
 % \RequirePackage{fontspec}
-\RequirePackage[left=0.75in,top=0.3in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+\RequirePackage{geometry} % Document margins
 \RequirePackage{hyperref}
 % \RequirePackage{fontawesome}
 % \RequirePackage{mfirstuc}
@@ -24,12 +24,28 @@
 % \RequirePackage{lipsum}
 \RequirePackage{array}
 \RequirePackage{ragged2e}
+\RequirePackage{tabularx}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 
 \usepackage{tgbonum}
+
+\usepackage{tabularx}
+\usepackage{graphicx}
+
+\usepackage[dvipsnames]{xcolor}
+
+% Margins
+
+\geometry{
+  a4paper,
+  left=0.3in,
+  right=0.3in,
+  top=0.2in,
+  bottom=0.2in,
+}
 
 %Setup
 
@@ -51,13 +67,12 @@
   \center\noindent\makebox[\linewidth]{\rule{0.95\paperwidth}{0.8pt}}
 }
 
+\definecolor{msblue}{RGB}{47, 84, 150}
 
 \hypersetup{
     colorlinks=true,
     urlcolor=cyan,
 }
-
-\fontfamily{phv}\selectfont
 
 % View commands
 % Header
@@ -79,19 +94,40 @@
 % \newcommand{\githubview}{\href{\@linkedinaccount}{\faLinkedinSquare\ \footnotesize linkedin}}
 % \newcommand{\linkedinview}{\href{\@githubaccount}{\faGithubSquare\ \footnotesize github}}
 
+\graphicspath{ {./icons/} }
+
 \def\HSinfo{\rule[-1cm]{0pt}{1.1cm}}
 
+\newcolumntype{L}{>{\hsize=.27\hsize}X}
+\newcolumntype{C}{>{\hsize=.5\hsize}X}
+\newcolumntype{R}{>{\hsize=.24\hsize}X}
+\newcolumntype{I}{>{\hsize=.01\hsize}X}
+\newcommand{\singlecell}[2]{\multicolumn{1}{#1}{\small #2}}
+\newcommand{\iconcell}[1]{\includegraphics[width=0.01\textwidth]{#1}}
+
 \newcommand{\info}{
-  \center\huge\textbf \@fullname \\
-  \normalsize
+  \fontfamily{lmr}\selectfont
   \begin{center}
-    \begin{tabular}{ p{3.1cm} c r }
-      & \@education & \@githubname \\ 
-      & \@school    & \@linkedinname \\  
-      & \@phone     & \@email    
-    \end{tabular}
+    \begin{tabularx} {\textwidth} {L C R I}
+      & \multicolumn{1}{c}{\LARGE\textbf \@fullname} & & \\
+      & \singlecell{c}{\@education} & \singlecell{r}{\color{msblue}\@githubname}   & \iconcell{mark-github-256} \\ 
+      & \singlecell{c}{\@school}    & \singlecell{r}{\color{msblue}\@linkedinname} & \iconcell{square-linkedin-512.png} \\ 
+      & \singlecell{c}{\@phone}     & \singlecell{r}{\color{msblue}\@email}        & \iconcell{email_icon} \\ 
+    \end{tabularx}
   \end{center}
 }
+
+% \newcommand{\info}{
+%   \fontfamily{lmr}\selectfont
+%   \begin{center}
+%     \begin{tabularx} {\textwidth} {L C R I}
+%       & \multicolumn{1}{c}{\LARGE\textbf \@fullname} & & \\
+%       & \singlecell{c}{\@education} & \singlecell{r}{\@githubname}   & \\ 
+%       & \singlecell{c}{\@school}    & \singlecell{r}{\@linkedinname} & \\ 
+%       & \singlecell{c}{\@phone}     & \singlecell{r}{\@email}        & \\ 
+%     \end{tabularx}
+%   \end{center}
+% }
 
 % \newcommand{\contact}{%
 %         {\small \@address  \cps \@mobile \\ \@mail%

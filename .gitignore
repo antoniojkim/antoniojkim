@@ -1,6 +1,7 @@
 # Latex Temp Files
 */.auctex-auto/
 *.aux
+*.dvi
 *.fls
 *.fdb_latexmk
 *.log
